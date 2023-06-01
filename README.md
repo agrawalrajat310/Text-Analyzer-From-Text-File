@@ -22,7 +22,7 @@
 
 10. Display the results on the UI.
 
-## Commands used for installing diff. dependencies :-
+## Commands used for installing diff. dependencies for both Frontend & Backend :-
 
 1. Frontend :-
 
