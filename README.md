@@ -1,6 +1,6 @@
 # Text-Analyzer-From-Text-File
 
-- Making a text analyzer from a text file.
+## - Making a text analyzer from a text file.
 
 1. Create a basic web app to analyze the text given in a text file.
 
