@@ -9,7 +9,7 @@
 3. The document will be uploaded as a text file.
 
 
-- Commands used for installing diff. dependencies :-
+## Commands used for installing diff. dependencies :-
 
 1. Frontend :-
 
@@ -21,4 +21,5 @@
 
 - npm init
 - create server.js
-- nom i express 
+- npm i express
+- npm i express multer (if you use multer)
