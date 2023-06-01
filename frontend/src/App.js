@@ -1,8 +1,10 @@
-import React, { useState } from 'react';
-import axios from 'axios';
+import React, { useState } from "react";
+
+import axios from "axios";
 
 function App() {
   const [selectedFile, setSelectedFile] = useState(null);
+
   const [wordCounts, setWordCounts] = useState(null);
 
   const handleFileChange = (event) => {
@@ -13,10 +15,10 @@ function App() {
     if (!selectedFile) return;
 
     const formData = new FormData();
-    formData.append('file', selectedFile);
+    formData.append("file", selectedFile);
 
     axios
-      .post('http://localhost:3001/upload', formData)
+      .post("http://localhost:3001/upload", formData)
       .then((response) => {
         setWordCounts(response.data);
       })
