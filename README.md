@@ -9,3 +9,16 @@
 3. The document will be uploaded as a text file.
 
 
+- Commands used for installing diff. dependencies :-
+
+1. Frontend :-
+
+- npx create-react-app .
+- npm i axios
+
+
+2. Backend :-
+
+- npm init
+- create server.js
+- nom i express 
