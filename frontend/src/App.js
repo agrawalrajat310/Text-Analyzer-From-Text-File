@@ -20,6 +20,7 @@ function App() {
 
     const formData = new FormData();
     formData.append("file", selectedFile);
+    console.log(formData);
 
     axios
       .post("http://localhost:3001/upload", formData)
