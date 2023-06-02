@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import axios from 'axios';
+import React, { useState } from "react";
+import axios from "axios";
 
 function App() {
   const [selectedFile, setSelectedFile] = useState(null);
@@ -16,10 +16,10 @@ function App() {
     setIsLoading(true);
 
     const formData = new FormData();
-    formData.append('file', selectedFile);
+    formData.append("file", selectedFile);
 
     axios
-      .post('http://localhost:3001/upload', formData)
+      .post("http://localhost:3001/upload", formData)
       .then((response) => {
         setWordCounts(response.data);
       })
@@ -36,7 +36,7 @@ function App() {
       <h1>Text Analyzer</h1>
       <input type="file" onChange={handleFileChange} />
       <button onClick={handleFileUpload} disabled={isLoading}>
-        {isLoading ? 'Uploading...' : 'Upload'}
+        {isLoading ? "Uploading..." : "Upload"}
       </button>
       {isLoading && <p>Processing the file...</p>}
       {wordCounts.length > 0 && (
