@@ -1,9 +1,12 @@
 import React, { useState } from "react";
+
 import axios from "axios";
 
 function App() {
   const [selectedFile, setSelectedFile] = useState(null);
+
   const [wordCounts, setWordCounts] = useState([]);
+
   const [isLoading, setIsLoading] = useState(false);
 
   const handleFileChange = (event) => {
