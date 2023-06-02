@@ -1,7 +1,6 @@
 const express = require("express");
 const multer = require("multer");
 const fs = require("fs");
-const path = require("path");
 const app = express();
 
 const upload = multer({ dest: "uploads/" });
@@ -22,7 +21,12 @@ app.post("/upload", upload.single("file"), (req, res) => {
 
   fs.unlinkSync(filePath);
 
-  res.json(wordCounts);
+  const wordCountArray = Object.entries(wordCounts).map(([word, count]) => ({
+    word,
+    count,
+  }));
+
+  res.json(wordCountArray);
 });
 
 app.listen(3001, () => {
