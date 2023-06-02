@@ -1,51 +1,49 @@
-// import React, { useState } from "react";
+import React, { useState } from 'react';
+import axios from 'axios';
 
-// import axios from "axios";
+function App() {
+  const [selectedFile, setSelectedFile] = useState(null);
+  const [wordCounts, setWordCounts] = useState([]);
 
-// function App() {
-//   const [selectedFile, setSelectedFile] = useState(null);
+  const handleFileChange = (event) => {
+    setSelectedFile(event.target.files[0]);
+  };
 
-//   const [wordCounts, setWordCounts] = useState(null);
+  const handleFileUpload = () => {
+    if (!selectedFile) return;
 
-//   const handleFileChange = (event) => {
-//     setSelectedFile(event.target.files[0]);
-//   };
+    const formData = new FormData();
+    formData.append('file', selectedFile);
 
-//   const handleFileUpload = () => {
-//     if (!selectedFile) return;
+    axios
+      .post('http://localhost:3001/upload', formData)
+      .then((response) => {
+        setWordCounts(response.data);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
 
-//     const formData = new FormData();
-//     formData.append("file", selectedFile);
+  return (
+    <div>
+      <h1>Text Analyzer</h1>
+      <input type="file" onChange={handleFileChange} />
+      <button onClick={handleFileUpload}>Upload</button>
+      {wordCounts.length > 0 && (
+        <div>
+          <h2>Word Count:</h2>
+          <ul>
+            {wordCounts.map((wordCount) => (
+              <li key={wordCount.word}>
+                {wordCount.word} - {wordCount.count}
+              </li>
+            ))}
+          </ul>
+        </div>
+      )}
+    </div>
+  );
+}
 
-//     axios
-//       .post("http://localhost:3001/upload", formData)
-//       .then((response) => {
-//         setWordCounts(response.data);
-//       })
-//       .catch((error) => {
-//         console.log(error);
-//       });
-//   };
-
-//   return (
-//     <div>
-//       <h1>Text Analyzer</h1>
-//       <input type="file" onChange={handleFileChange} />
-//       <button onClick={handleFileUpload}>Upload</button>
-//       {wordCounts && (
-//         <div>
-//           <h2>Word Count:</h2>
-//           <ul>
-//             {Object.entries(wordCounts).map(([word, count]) => (
-//               <li key={word}>
-//                 {word} - {count}
-//               </li>
-//             ))}
-//           </ul>
-//         </div>
-//       )}
-//     </div>
-//   );
-// }
-
-// export default App;
+export default App;
