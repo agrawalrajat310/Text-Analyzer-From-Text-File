@@ -35,3 +35,4 @@
 - create server.js
 - npm i express
 - npm i express multer (if you use multer)
+- npm install cors
