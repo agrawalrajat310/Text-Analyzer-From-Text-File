@@ -1,6 +1,6 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import axios from 'axios';
+import React from "react";
+import ReactDOM from "react-dom";
+import axios from "axios";
 
 class FileUpload extends React.Component {
   state = {
@@ -17,10 +17,10 @@ class FileUpload extends React.Component {
     if (!selectedFile) return;
 
     const formData = new FormData();
-    formData.append('file', selectedFile);
+    formData.append("file", selectedFile);
 
     axios
-      .post('http://localhost:3001/upload', formData)
+      .post("http://localhost:3001/upload", formData)
       .then((response) => {
         this.setState({ wordCounts: response.data });
       })
@@ -54,8 +54,7 @@ class FileUpload extends React.Component {
   }
 }
 
-ReactDOM.render(<FileUpload />, document.getElementById('root'));
-
+ReactDOM.render(<FileUpload />, document.getElementById("root"));
 
 // If you want to start measuring performance in your app, pass a function
 // to log results (for example: reportWebVitals(console.log))
