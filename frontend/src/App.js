@@ -4,6 +4,7 @@ import axios from 'axios';
 function App() {
   const [selectedFile, setSelectedFile] = useState(null);
   const [wordCounts, setWordCounts] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
 
   const handleFileChange = (event) => {
     setSelectedFile(event.target.files[0]);
@@ -11,6 +12,8 @@ function App() {
 
   const handleFileUpload = () => {
     if (!selectedFile) return;
+
+    setIsLoading(true);
 
     const formData = new FormData();
     formData.append('file', selectedFile);
@@ -22,6 +25,9 @@ function App() {
       })
       .catch((error) => {
         console.log(error);
+      })
+      .finally(() => {
+        setIsLoading(false);
       });
   };
 
@@ -29,7 +35,10 @@ function App() {
     <div>
       <h1>Text Analyzer</h1>
       <input type="file" onChange={handleFileChange} />
-      <button onClick={handleFileUpload}>Upload</button>
+      <button onClick={handleFileUpload} disabled={isLoading}>
+        {isLoading ? 'Uploading...' : 'Upload'}
+      </button>
+      {isLoading && <p>Processing the file...</p>}
       {wordCounts.length > 0 && (
         <div>
           <h2>Word Count:</h2>
