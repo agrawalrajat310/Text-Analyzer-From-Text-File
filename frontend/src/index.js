@@ -1,62 +1,8 @@
 import React from "react";
-import { createRoot } from "react-dom/client";
-import axios from "axios";
+import ReactDOM from "react-dom";
+import App from "./App";
 
-class FileUpload extends React.Component {
-  state = {
-    selectedFile: null,
-    wordCounts: null,
-  };
-
-  handleFileChange = (event) => {
-    this.setState({ selectedFile: event.target.files[0] });
-  };
-
-  handleFileUpload = () => {
-    const { selectedFile } = this.state;
-    if (!selectedFile) return;
-
-    const formData = new FormData();
-    formData.append("file", selectedFile);
-
-    axios
-      .post("http://localhost:3001/upload", formData)
-      .then((response) => {
-        this.setState({ wordCounts: response.data });
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-  };
-
-  render() {
-    const { wordCounts } = this.state;
-
-    return (
-      <div>
-        <h1>Text Analyzer</h1>
-        <input type="file" onChange={this.handleFileChange} />
-        <button onClick={this.handleFileUpload}>Upload</button>
-        {wordCounts && (
-          <div>
-            <h2>Word Count:</h2>
-            <ul>
-              {Object.entries(wordCounts).map(([word, count]) => (
-                <li key={word}>
-                  {word} - {count}
-                </li>
-              ))}
-            </ul>
-          </div>
-        )}
-      </div>
-    );
-  }
-}
-
-const container = document.getElementById("root");
-const root = createRoot(container); // createRoot(container!) if you use TypeScript
-root.render(<FileUpload />);
+ReactDOM.render(<App />, document.getElementById("root"));
 
 // If you want to start measuring performance in your app, pass a function
 // to log results (for example: reportWebVitals(console.log))
