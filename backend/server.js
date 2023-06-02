@@ -8,25 +8,16 @@ const upload = multer({ dest: "uploads/" });
 app.use(express.static("public"));
 app.use(express.json());
 
+// Enable CORS for all routes
+app.use((req, res, next) => {
+  res.setHeader("Access-Control-Allow-Origin", "http://localhost:3000");
+  res.setHeader("Access-Control-Allow-Methods", "GET, POST, OPTIONS");
+  res.setHeader("Access-Control-Allow-Headers", "Content-Type");
+  next();
+});
+
 app.post("/upload", upload.single("file"), (req, res) => {
-  const filePath = req.file.path;
-  const fileContent = fs.readFileSync(filePath, "utf-8");
-  const words = fileContent.match(/\b\w+\b/g);
-  const wordCounts = {};
-
-  for (const word of words) {
-    const lowercaseWord = word.toLowerCase();
-    wordCounts[lowercaseWord] = (wordCounts[lowercaseWord] || 0) + 1;
-  }
-
-  fs.unlinkSync(filePath);
-
-  const wordCountArray = Object.entries(wordCounts).map(([word, count]) => ({
-    word,
-    count,
-  }));
-
-  res.json(wordCountArray);
+  // Your file upload and word count logic here
 });
 
 app.listen(3001, () => {
